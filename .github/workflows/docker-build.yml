@@ -2,8 +2,7 @@ name: Build and Push Docker Images
 
 on:
   push:
-    branches: [ main ]
-    tags: [ '*' ]
+    branches: [main]
 
 jobs:
   build:
@@ -21,13 +20,31 @@ jobs:
       - name: Build and push latest
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: pavelwell/static-jinja-plus:latest
           build-args: SJP_VERSION=0.1.1
 
+      - name: Build and push 0.1.1
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: pavelwell/static-jinja-plus:0.1.1
+          build-args: SJP_VERSION=0.1.1
+
+      - name: Build and push 0.1.0
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: pavelwell/static-jinja-plus:0.1.0
+          build-args: SJP_VERSION=0.1.0
+
       - name: Build and push develop
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: pavelwell/static-jinja-plus:develop
           build-args: SJP_VERSION=main
